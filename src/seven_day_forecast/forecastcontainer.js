@@ -21,7 +21,7 @@ export default class ForecastContainer extends Component {
       error: null,
     }
 
-    this.BASE_API_CALL = 'http://api.wunderground.com/api/29e8a4acfdfee465/geolookup/forecast10day/q/'
+    this.BASE_API_CALL = 'https://api.wunderground.com/api/29e8a4acfdfee465/geolookup/forecast10day/q/'
     this.wunderLogo = require('../images/wundergroundLogo_4c_horz.jpg')
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
