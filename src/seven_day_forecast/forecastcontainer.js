@@ -23,13 +23,6 @@ export default class ForecastContainer extends Component {
 
     this.BASE_API_CALL = 'https://api.wunderground.com/api/29e8a4acfdfee465/geolookup/forecast10day/q/'
     this.wunderLogo = require('../images/wundergroundLogo_4c_horz.jpg')
-    this.handleClick = this.handleClick.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.toggleExtended = this.toggleExtended.bind(this)
-    this.forecastFromLocation = this.forecastFromLocation.bind(this)
-    this.showError = this.showError.bind(this)
-    this.updateExtended = this.updateExtended.bind(this)
   }
 
   componentDidMount() {
@@ -56,7 +49,7 @@ export default class ForecastContainer extends Component {
       })
   }
 
-  updateExtended() {
+  updateExtended = () => {
     /* Since different timezones may have different days of the week in their forecast
     (before midnight one location, after midnight another), makes sure the currently
     extended day exists in the new forecast data, updates if so, hides otherwise */
@@ -71,12 +64,12 @@ export default class ForecastContainer extends Component {
     this.updateForecast(call)
   }
 
-  forecastFromPostal(e) {
+  forecastFromPostal = (e) => {
     let call = `${this.BASE_API_CALL}${e.target.postal.value}.json`
     this.updateForecast(call)
   }
 
-  forecastFromLocation() {
+  forecastFromLocation = () => {
     const geoOptions = {
       maximumAge: 5 * 60 * 1000,
       timeout: 10 * 1000,
@@ -91,7 +84,7 @@ export default class ForecastContainer extends Component {
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions)
   }
 
-  toggleExtended(day) {
+  toggleExtended = (day) => {
     let isCurrentlyShown = this.state.extended
       && this.state.showExtended
       && this.state.extended.date.epoch === day.date.epoch
@@ -104,21 +97,21 @@ export default class ForecastContainer extends Component {
       this.setState({showExtended: true, extended: day})
   }
 
-  showError() {
+  showError = () => {
     let error = this.state.error
     if (error)
       return <Error error={error}/>
   }
 
-  handleClick(day) {
+  handleClick = (day) => {
     this.toggleExtended(day)
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({postalInput: e.target.value})
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault()
     const cityStateEx = /.*\s?, [A-Z][A-Z]/
     cityStateEx.test() ? this.forecastFromCityState(e) : this.forecastFromPostal(e)
